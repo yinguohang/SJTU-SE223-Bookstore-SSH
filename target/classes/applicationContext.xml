@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:lang="http://www.springframework.org/schema/lang"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
+		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-3.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+		http://www.springframework.org/schema/context  
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd  
+        http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-4.0.xsd 
+	 	http://www.springframework.org/schema/data/mongo
+      	http://www.springframework.org/schema/data/mongo/spring-mongo.xsd
+   		http://www.springframework.org/schema/data/repository
+     	http://www.springframework.org/schema/data/repository/spring-repository-1.5.xsd
+     	http://www.springframework.org/schema/beans  
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<!-- MongoDB 配置 -->
+	<mongo:mongo host="127.0.0.1" port="27017" />  
+ 	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">  
+    	<constructor-arg ref="mongo"/>  
+    	<constructor-arg name="databaseName" value="test"/>  
+	</bean>  
+	<!-- IoC Dao -->
+	<bean id = "UserDao" class="Dao.UserDaoImpl">
+		<property name="mongoTemplate" ref="mongoTemplate"></property>
+	</bean>
+	<bean id = "BookDao" class="Dao.BookDaoImpl">
+	</bean>
+	<bean id = "OrderDao" class="Dao.OrderDaoImpl">
+	</bean>
+	<!-- IoC Biz -->
+	<bean id="UserBiz" class="Biz.UserBizImpl">
+		<property name="userDao">
+			<ref local="UserDao"/>
+		</property>
+	</bean>
+	<bean id="BookBiz" class="Biz.BookBizImpl">
+		<property name="bookDao">
+			<ref local="BookDao"/>
+		</property>
+	</bean>	
+	<bean id="OrderBiz" class="Biz.OrderBizImpl">
+		<property name="orderDao">
+			<ref local="OrderDao"/>
+		</property>
+		<property name="bookDao">
+			<ref local="BookDao"/>
+		</property>
+	</bean>
+	<!-- IoC Action -->	
+	<bean id="AddBookToShopCartAction" class="com.ygh.AddBookToShopCartAction">
+	</bean>
+	<bean id = "AddNewBookAction" class="com.ygh.AddNewBookAction">
+		<property name="bookBiz" ref="BookBiz"></property>
+	</bean>
+	<bean id = "AddUserProfileAction" class="com.ygh.AddUserProfileAction">
+		<property name="userBiz" ref="UserBiz"></property>
+	</bean>
+	<bean id = "ChangePasswordAction" class="com.ygh.ChangePasswordAction">
+		<property name="userBiz" ref="UserBiz"></property>
+	</bean>
+	<bean id = "CreateOrderAction" class="com.ygh.CreateOrderAction">
+		<property name="orderBiz" ref="OrderBiz"></property>
+	</bean>
+	<bean id = "DisplayAllBookAction" class="com.ygh.DisplayAllBookAction">
+		<property name="bookBiz" ref="BookBiz"></property>
+	</bean>
+	<bean id = "DisplayBookAction" class="com.ygh.DisplayBookAction">
+	</bean>
+	<bean id = "IsExistedAccountAction" class="com.ygh.IsExistedAccountAction">
+		<property name="userBiz" ref="UserBiz"></property>
+	</bean>
+	<bean id = "LoginAction" class="com.ygh.LoginAction">
+		<property name="userBiz" ref="UserBiz"></property>
+	</bean>
+	<bean id = "LogOutAction" class="com.ygh.LogOutAction">
+	</bean>
+	<bean id = "ModifyUserAction" class="com.ygh.ModifyUserAction">
+		<property name="userBiz" ref="UserBiz"></property>
+	</bean>
+	<bean id = "ModifyUserProfileAction" class="com.ygh.ModifyUserProfileAction">
+		<property name="userBiz" ref="UserBiz"></property>
+	</bean>
+	<bean id = "ModifyBookAction" class="com.ygh.ModifyBookAction">
+		<property name="bookBiz" ref="BookBiz"></property>
+	</bean>
+	<bean id = "RegisterAction" class="com.ygh.RegisterAction">
+		<property name="userBiz" ref="UserBiz"></property>
+	</bean>
+	<bean id = "RemoveBookAction" class="com.ygh.RemoveBookAction">
+		<property name="bookBiz" ref="BookBiz"></property>
+	</bean>
+	<bean id = "RemoveUserAction" class="com.ygh.RemoveUserAction">
+		<property name="userBiz" ref="UserBiz"></property>
+	</bean>
+	<bean id = "RemoveUserProfileAction" class="com.ygh.RemoveUserProfileAction">
+		<property name="userBiz" ref="UserBiz"></property>
+	</bean>
+	<bean id = "SearchBookAction" class="com.ygh.SearchBookAction">
+		<property name="bookBiz" ref="BookBiz"></property>
+	</bean>
+	<bean id = "ShowAllUserAction" class="com.ygh.ShowAllUserAction">
+		<property name="userBiz" ref="UserBiz"></property>
+	</bean>
+	<bean id = "ShowOrderAction" class="com.ygh.ShowOrderAction">
+	</bean>
+	<bean id = "ShowShopCartAction" class="com.ygh.ShowShopCartAction">
+		<property name="bookBiz" ref="BookBiz"></property>
+	</bean>
+	<bean id = "ShowUserProfileAction" class="com.ygh.ShowUserProfileAction">
+		<property name="userBiz" ref="UserBiz"></property>
+	</bean>
+	<bean id = "StatisticsPersonalAction" class="com.ygh.StatisticsPersonalAction">
+	</bean>
+	<bean id = "StatisticsByDateAction" class="com.ygh.StatisticsByDateAction">
+		<property name="orderBiz" ref="OrderBiz"></property>
+	</bean>
+</beans>

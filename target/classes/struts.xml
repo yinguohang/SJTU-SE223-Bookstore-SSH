@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<package name="struts2" extends="struts-default, json-default">
+		<!-- Ajax json -->
+		<action name="AddBookToShopCartAction" class="AddBookToShopCartAction">  
+        	<result type="json">
+        		<param name="root">content</param>
+        	</result>  
+        </action>	
+        <!-- Ajax page -->
+		<action name="AddNewBookAction" class="AddNewBookAction">  
+        	<result name="finish" type="json">
+        		<param name="root">content</param>
+        	</result>  
+        	<result name="continue">/jsp/Center.jsp</result>
+        </action>
+        <!-- Ajax json -->
+		<action name="AddUserProfileAction" class="AddUserProfileAction">  
+        	<result type="json">
+        		<param name="root">content</param>
+        	</result> 
+        </action>
+        <!-- Ajax json -->
+		<action name="ChangePasswordAction" class="ChangePasswordAction">  
+        	<result type="json">
+        		<param name="root">content</param>
+        	</result>  
+        </action>
+        <!-- Ajax json -->
+		<action name="CreateOrderAction" class="CreateOrderAction">  
+        	<result type="json">
+        		<param name="root">content</param>
+        	</result>  
+        </action>
+        <!-- Ajax page p.s. Don't need logined-->
+		<action name="DisplayAllBookAction" class="DisplayAllBookAction">  
+        	<result name="success">
+        		/jsp/SearchBookModel.jsp
+        	</result>  
+        </action>
+        <!-- Ajax page -->
+		<action name="DisplayBookAction" class="DisplayBookAction">  
+        	<result name="continue">/jsp/OwnBookModel.jsp</result>
+        </action>
+        <!-- Ajax json p.s. Don't need logined-->
+		<action name="IsExistedAccountAction" class="IsExistedAccountAction">  
+        	<result type="json">
+        		<param name="root">content</param>
+        	</result>  
+        </action>
+        <!-- Ajax page p.s. Don't need logined-->
+		<action name="LoginAction" class="LoginAction">  
+        	<result type="json">
+        		<param name="root">content</param>
+        	</result>  
+        </action>  
+		<action name="LogOutAction" class="LogOutAction">  
+        	<result name="success">
+        		/jsp/Welcome.jsp
+        	</result>  
+        </action>
+		<!-- Ajax json -->
+		<action name="ModifyBookAction" class="ModifyBookAction">  
+        	<result type="json">
+        		<param name="root">content</param>
+        	</result>  
+        </action>		
+        <!-- Ajax json Priority-->
+		<action name="ModifyUserAction" class="ModifyUserAction">  
+        	<result type="json">
+        		<param name="root">content</param>
+        	</result>  
+        </action>
+        <!-- Ajax json Priority-->
+		<action name="ModifyUserProfileAction" class="ModifyUserProfileAction">  
+        	<result type="json">
+        		<param name="root">content</param>
+        	</result>  
+        </action>
+        <!-- Ajax page p.s. Don't need logined-->
+		<action name="RegisterAction" class="RegisterAction">  
+        	<result type="json">
+        		<param name="root">content</param>
+        	</result>  
+        </action>	
+        <!-- Ajax json-->
+		<action name="RemoveBookAction" class="RemoveBookAction">  
+        	<result type="json">
+        		<param name="root">content</param>
+        	</result>  
+        </action>
+        <!-- Ajax json Priority-->
+		<action name="RemoveUserAction" class="RemoveUserAction">  
+        	<result type="json">
+        		<param name="root">content</param>
+        	</result>  
+        </action>
+        <!-- Ajax json-->
+        <action name="RemoveUserProfileAction" class="RemoveUserProfileAction">  
+        	<result type="json">
+        		<param name="root">content</param>
+        	</result>  
+        </action>
+        <!-- Ajax page -->
+        <action name="SearchBookAction" class="SearchBookAction">  
+        	<result name="finish" type="json">
+        		<param name="root">content</param>
+        	</result>  
+        	<result name="continue">/jsp/BuyBookModel.jsp</result>
+        </action>
+        <!-- Ajax page Priority-->
+		<action name="ShowAllUserAction" class="ShowAllUserAction">  
+        	<result name="success">/jsp/UserModel.jsp</result>
+        </action>
+        <!-- Ajax page -->
+		<action name="ShowOrderAction" class="ShowOrderAction">  
+        	<result name="finish" type="json">
+        		<param name="root">content</param>
+        	</result>  
+        	<result name="continue">/jsp/OrderModel.jsp</result>
+        </action>
+        <!-- Ajax page -->
+		<action name="ShowShopCartAction" class="ShowShopCartAction">  
+        	<result name="finish" type="json">
+        		<param name="root">content</param>
+        	</result>  
+        	<result name="continue">/jsp/ShopCartModel.jsp</result>
+        </action>
+        <!-- Ajax page -->
+		<action name="ShowUserProfileAction" class="ShowUserProfileAction">  
+        	<result name="continue">/jsp/UserProfileModel.jsp</result>
+        </action>
+        <!-- Ajax page -->
+		<action name="StatisticsPersonalAction" class="StatisticsPersonalAction">  
+        	<result name="continue">/jsp/StatisticsModel.jsp</result>
+        </action>
+        <action name="StatisticsByDateAction" class="StatisticsByDateAction">  
+        	<result name="finish" type="json">
+        		<param name="root">content</param>
+        	</result>  
+        	<result name="continue">/jsp/StatisticsByDateModel.jsp</result>
+        </action>
+	</package>
+</struts>

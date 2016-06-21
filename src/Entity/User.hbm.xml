@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+	<class name="Entity.User" table="users">
+		<id name="id" column="id">
+			<generator class="identity"/>
+		</id>
+		<property name="username"/>
+		<property name="password"/>
+		<property name="sex"/>
+		<property name="coin"/>
+		<property name="mobile"/>
+		<property name="createDate" column="create_date"/>
+		<set name="sellBooks" table="books" lazy="false">
+			<key column="seller_id"></key>
+			<one-to-many class="Entity.Book"/>
+		</set>
+		<set name="orders" table="orders" lazy="extra">
+			<key column="owner"></key>
+			<one-to-many class="Entity.Order"/>
+		</set>
+		<property name="priority"/>
+	</class>
+</hibernate-mapping>

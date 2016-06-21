@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+	<class name="Entity.Order" table="orders">
+		<id name="id" column="id">
+			<generator class="identity"/>
+		</id>
+		<many-to-one name="owner"
+			class="Entity.User"
+			column="owner"
+			lazy="false"
+			cascade="all">
+		</many-to-one>
+		<property name="price"/>
+		<property name="createDate" column="create_date"/>
+		<map name="books" table="books_in_order" lazy="false">
+			<key column="order_id"/>
+			<map-key-many-to-many column="book_id" class="Entity.Book"/>
+			<element column="book_num" type="int" ></element>
+		</map>
+	</class>
+</hibernate-mapping>
